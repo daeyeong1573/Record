@@ -7,8 +7,8 @@
 data class Student(var name: String, var studentId: Int)
 
 val student = Student("", 0)
-person.name = "김대영"
-person.age = 2403
+student.name = "김대영"
+student.studentId = 2403
 println("$person")
 
 // 결과값(김대영,2403) 
@@ -58,5 +58,42 @@ ex)
     Student(name=김대영, studentId=2403)
     kotlin.Unit // 리턴값을 주지않아 값이 제대로 나오지 않는걸 확인 가능합니다.
     김대영 is 2403
+
+```
+
+2.with
+with 함수를 타고 들어가면 아래와 같은 with함수의 형태를 확인할 수 있다.
+```kotlin
+public inline fun <T, R> with(receiver: T, block: T.() -> R): R {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    return receiver.block()
+}
+```
+**with**는 일반 함수이기 때문에 객체 **receive**를 직접 입력받고, 객체를 사용하기 위한 두 번째 파라미터 블럭을 받는다. T.()를 람다 리시버라고 하는데, 입력을 받으면 함수 내에서 this를 사용하지 않고도 입력받은 객체(receiver)의 속성을 변경할 수 있습니다.
+
+간단하 예시로 아래와 같은 방법이 있습니다.
+```kotlin
+fun test() = with(binding){
+    //기존 binding 방식
+    binding.id
+
+    //with을 사용한 binding
+    id
+}
+```
+
+```kotlin
+    val student = Student("김대영",2403)
+    with(student){
+         println(name)
+         println(studentId)
+         //자기자신을 반환해야 할 경우 it이 아닌 this를 사용하여 반환해야 합니다.
+    }
+
+    //결과값
+    김대영
+    2403    
 
 ```
