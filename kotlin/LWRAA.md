@@ -61,7 +61,7 @@ ex)
 
 ```
 
-2.with
+## 2. with
 with 함수를 타고 들어가면 아래와 같은 with함수의 형태를 확인할 수 있다.
 ```kotlin
 public inline fun <T, R> with(receiver: T, block: T.() -> R): R {
@@ -97,3 +97,58 @@ fun test() = with(binding){
     2403    
 
 ```
+
+
+## 3.run
+run은 위의 두개와는 다르게 2가지 형태로 구성되어 있습니다.
+
+먼저,
+```kotlin
+ public inline fun <T, R> T.run(block: T.() -> R): R {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    return block()
+}
+```
+**run**은 **with**처럼 인자로 람다 리시버를 받고, 반환 형태도 비슷하게 생겼지만 T의 확장함수라는 점에서 차이가 있다. 확장함수이기 때문에 safe call(.?)을 붙여 non-null 일 때에만 실행할 수 있다. 어떤 값을 계산할 필요가 있거나 여러 개의 지역변수 범위를 제한할 때 사용한다고 합니다.
+
+```kotlin
+ val student = Student("",2403)
+
+    val studentId = student.run {
+        ++studentId
+    }
+
+    println(studentId)
+
+    //결과값
+    2404
+```
+
+```kotlin
+public inline fun <R> run(block: () -> R): R {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    return block()
+}
+```
+이 **run**은 확장 함수가 아니고, 블럭에 입력값도 없다. 따라서 객체를 전달받아서 속성을 변경하는 형식에 사용되는 함수가 아니다. 이 함수는 어떤 객체를 생성하기 위한 명령문을 블럭 안에 묶음으로써 가독성을 높이는 역할을 합니다.
+
+```kotlin
+val student = Student("",0)
+
+    val studentPrint = student.run {
+        val studentId = 2403
+        val name = "김대영"
+        Student(name,studentId)
+    }
+
+    println(studentPrint)
+    
+  //결과값
+  Student(name=김대영, studentId=2403)
+
+```
+
