@@ -5,5 +5,5 @@
 * [LWRAA](https://github.com/daeyeong1573/Record/blob/main/kotlin/LWRAA.md)<br>
 
 ## Android 
-* [SharedPrefrence](https://github.com/daeyeong1573/Record/blob/main/sharedpreference.md)<br>
-* [Android에서 특수문자 사용하기](https://github.com/daeyeong1573/Record/blob/main/use_special%20_symbol.md)
+* [SharedPrefrence](https://github.com/daeyeong1573/Record/blob/main/Android/sharedpreference.md)<br>
+* [Android에서 특수문자 사용하기](https://github.com/daeyeong1573/Record/blob/main/Android/use_special%20_symbol.md)
