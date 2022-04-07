@@ -3,6 +3,7 @@
 
 ## Kotlin
 * [LWRAA](https://github.com/daeyeong1573/Record/blob/main/kotlin/LWRAA.md)<br>
+* [IntArray](kotlin/IntArray.md)
 
 ## Android 
 * [SharedPrefrence](https://github.com/daeyeong1573/Record/blob/main/Android/sharedpreference.md)<br>
